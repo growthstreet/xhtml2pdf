@@ -594,7 +594,7 @@ def _drawBullet(canvas, offset, cur_y, bulletText, style):
     tx2 = canvas.beginText(style.bulletIndent, cur_y + getattr(style, "bulletOffsetY", 0))
     tx2.setFont(style.bulletFontName, style.bulletFontSize)
     tx2.setFillColor(hasattr(style, 'bulletColor') and style.bulletColor or style.textColor)
-    if isinstance(bulletText, basestring):
+    if isinstance(bulletText, (str,bytes)):
         tx2.textOut(bulletText)
     else:
         for f in bulletText:
@@ -628,7 +628,7 @@ def _handleBulletWidth(bulletText, style, maxWidths):
     work out bullet width and adjust maxWidths[0] if neccessary
     """
     if bulletText:
-        if isinstance(bulletText, basestring):
+        if isinstance(bulletText, (str,bytes)):
             bulletWidth = stringWidth(bulletText, style.bulletFontName, style.bulletFontSize)
         else:
             #it's a list of fragments
@@ -1597,7 +1597,7 @@ class Paragraph(Flowable):
 
                 #now the font for the rest of the paragraph
                 tx.setFont(f.fontName, f.fontSize, leading)
-                ws = getattr(tx, '_wordSpace', 0)  
+                ws = getattr(tx, '_wordSpace', 0)
                 t_off = dpl(tx, offset, ws, lines[0][1], noJustifyLast and nLines == 1)
                 if f.underline or f.link or f.strike:
                     xs = tx.XtraState = ABag()
