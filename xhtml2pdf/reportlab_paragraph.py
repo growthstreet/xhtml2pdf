@@ -55,7 +55,13 @@ if sys.version[0] != '2':
             aux = var1
             var1 = var2
             var2 = aux
-        return join_old(var1, var2)
+        var2_string = []
+        for bytes_string in var2:
+            if type(bytes_string) is bytes:
+                var2_string.append(bytes_string.decode("utf-8"))
+            else:
+                var2_string.append(bytes_string)
+        return join_old(var1, var2_string)
 ###############################################################
 ###############################################################
 ###############################################################

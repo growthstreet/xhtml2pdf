@@ -511,7 +511,9 @@ class PmlImage(Flowable, PmlMaxHeightMixIn):
         return self.dWidth, self.dHeight
 
     def getImage(self):
-        img = PmlImageReader(StringIO.StringIO(self._imgdata))
+        from io import BytesIO
+        img = PmlImageReader(BytesIO(self._imgdata))
+        # img = PmlImageReader(StringIO.StringIO(self._imgdata))
         return img
 
     def draw(self):
